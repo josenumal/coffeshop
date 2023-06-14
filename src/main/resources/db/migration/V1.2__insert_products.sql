@@ -1,6 +1,6 @@
-INSERT INTO
-    coffee_shop_dev.products (product_name, price)
-VALUES
+insert into
+    coffee_shop_dev.product (product_name, price)
+values
     ('Latte', 5.3),
     ('Espresso', 4),
     ('Sandwich', 10.10),
