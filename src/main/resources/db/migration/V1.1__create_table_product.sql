@@ -1,6 +1,7 @@
-create table coffee_shop_dev.product (
-	product_id smallserial primary key,
-	product_name varchar ( 80 ) unique not null,
-	price numeric (5, 2) not null,
-	available boolean not null default true
+CREATE TABLE coffee_shop_dev.product (
+	id SMALLSERIAL PRIMARY KEY,
+	product_name VARCHAR ( 80 ) UNIQUE NOT NULL,
+	product_type VARCHAR ( 10 ) CHECK(product_type IN ('FOOD','DRINKS')),
+	price NUMERIC (5, 2) NOT NULL CHECK (price > 0),
+	available BOOLEAN NOT NULL DEFAULT TRUE
 );

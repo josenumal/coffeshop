@@ -1,11 +1,9 @@
 package com.inatlas.coffeeshop.entities;
 
+import com.inatlas.coffeeshop.models.ProductType;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "PRODUCT", schema = "COFFEE_SHOP_DEV")
@@ -13,11 +11,15 @@ import javax.persistence.Table;
 public class Product {
 
     @Id
-    @Column(name = "PRODUCT_ID")
+    @Column(name = "ID")
     private int productId;
 
     @Column(name = "PRODUCT_NAME")
     private String productName;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "PRODUCT_TYPE")
+    private ProductType productType;
 
     @Column(name = "PRICE")
     private float price;
@@ -26,3 +28,4 @@ public class Product {
     private boolean available;
 
 }
+
