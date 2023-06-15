@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class ProductsControllerImpl implements ProductsController {
+public class ProductControllerImpl implements ProductController {
 
     private final ProductService productService;
 
-    public ProductsControllerImpl(final ProductService productService) {
+    public ProductControllerImpl(final ProductService productService) {
         this.productService = productService;
     }
 
     @Override
-    public List<Product> getProducts() {
-        return productService.getProducts();
+    public List<Product> listProducts() {
+        return productService.listProducts();
     }
 
 }

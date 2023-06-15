@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @RequestMapping("/v1/products")
-public interface ProductsController {
+public interface ProductController {
 
     @GetMapping
-    List<Product> getProducts();
+    List<Product> listProducts();
 
 }
