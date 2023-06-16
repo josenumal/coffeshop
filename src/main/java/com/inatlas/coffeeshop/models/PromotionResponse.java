@@ -11,6 +11,5 @@ public class PromotionResponse {
 
     private boolean isApplicable;
     private Receipt receipt;
-    private String description;
 
 }

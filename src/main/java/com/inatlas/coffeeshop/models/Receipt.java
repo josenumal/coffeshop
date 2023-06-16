@@ -15,5 +15,14 @@ public class Receipt {
     private Set<FreeReceiptItem> freeReceiptItemSet;
     private float total;
     private int discountPercent;
+    private String promotionDescription;
+
+    public Receipt(final Receipt receipt) {
+        this.receiptItemSet = receipt.getReceiptItemSet();
+        this.freeReceiptItemSet = receipt.getFreeReceiptItemSet();
+        this.total = receipt.getTotal();
+        this.discountPercent = receipt.getDiscountPercent();
+        this.promotionDescription = receipt.getPromotionDescription();
+    }
 
 }

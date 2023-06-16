@@ -21,12 +21,14 @@ public class PromotionLotOfProducts implements Promotable {
         var productAmount = order.getOrderItems().values().stream().mapToInt(Integer::intValue).sum();
 
         if (productAmount <= CONDITION_PRODUCT_AMOUNT) {
-            return new PromotionResponse(false, receipt, PROMOTION_DESCRIPTION);
+            return new PromotionResponse(false, receipt);
         }
 
-        receipt.setTotal(receipt.getTotal() * PROMOTION_DISCOUNT_PERCENT / 100);
+        var newReceipt = new Receipt(receipt);
+        newReceipt.setTotal(receipt.getTotal() - (receipt.getTotal() * PROMOTION_DISCOUNT_PERCENT / 100));
+        newReceipt.setPromotionDescription(PROMOTION_DESCRIPTION);
 
-        return new PromotionResponse(true, receipt, PROMOTION_DESCRIPTION);
+        return new PromotionResponse(true, newReceipt);
     }
 
 }

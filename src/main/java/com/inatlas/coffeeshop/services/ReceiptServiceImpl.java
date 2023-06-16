@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 @Service
 public class ReceiptServiceImpl implements ReceiptService {
 
+    private static final String PROMOTION_DESCRIPTION = "No discount has been applied";
+
     public Receipt createReceipt(final Order order, final List<Product> productList) {
 
         var receiptItemSet = order.getOrderItems().entrySet().stream().map(
@@ -20,7 +22,7 @@ public class ReceiptServiceImpl implements ReceiptService {
         ).collect(Collectors.toSet());
 
         var total = (float) receiptItemSet.stream().mapToDouble(ReceiptItem::getTotal).sum();
-        return new Receipt(receiptItemSet, Collections.emptySet(), total, 0);
+        return new Receipt(receiptItemSet, Collections.emptySet(), total, 0, PROMOTION_DESCRIPTION);
     }
 
     private ReceiptItem createReceiptItem(final Integer productId, final Integer productAmount, final List<Product> productList) {

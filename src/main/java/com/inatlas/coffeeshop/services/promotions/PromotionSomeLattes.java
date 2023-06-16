@@ -28,13 +28,15 @@ public class PromotionSomeLattes implements Promotable {
                 .sum();
 
         if (latteAmount < CONDITION_PRODUCT_AMOUNT) {
-            return new PromotionResponse(false, receipt, PROMOTION_DESCRIPTION);
+            return new PromotionResponse(false, receipt);
         }
 
         var freeReceiptItemSet = Set.of(new FreeReceiptItem(latteAmount / CONDITION_PRODUCT_AMOUNT, PROMOTION_PRODUCT_NAME));
-        receipt.setFreeReceiptItemSet(freeReceiptItemSet);
+        var newReceipt = new Receipt(receipt);
+        newReceipt.setFreeReceiptItemSet(freeReceiptItemSet);
+        newReceipt.setPromotionDescription(PROMOTION_DESCRIPTION);
 
-        return new PromotionResponse(true, receipt, PROMOTION_DESCRIPTION);
+        return new PromotionResponse(true, newReceipt);
     }
 
 }
