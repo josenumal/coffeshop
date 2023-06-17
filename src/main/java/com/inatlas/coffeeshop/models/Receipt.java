@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 @Getter
@@ -13,7 +14,7 @@ public class Receipt {
 
     private Set<PaidReceiptItem> paidReceiptItemSet;
     private Set<FreeReceiptItem> freeReceiptItemSet;
-    private float total;
+    private BigDecimal total;
     private int discountPercent;
     private String promotionDescription;
 

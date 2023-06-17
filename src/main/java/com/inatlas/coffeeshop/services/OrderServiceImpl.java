@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -87,7 +88,7 @@ public class OrderServiceImpl implements OrderService {
     private List<FilterParams> getFilterParams() {
 
         return List.of(
-                new FilterParams(Comparator.comparing(Number::floatValue),
+                new FilterParams(Comparator.comparing(bigDecimalNumber -> BigDecimal.valueOf(bigDecimalNumber.doubleValue())),
                         Receipt::getTotal),
                 new FilterParams(Comparator.comparing(Number::intValue),
                         receipt -> receipt.getFreeReceiptItemSet().stream().mapToInt(FreeReceiptItem::getAmount).sum()));

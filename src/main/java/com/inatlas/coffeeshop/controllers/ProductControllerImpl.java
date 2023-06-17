@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@SuppressWarnings("unused")
 public class ProductControllerImpl implements ProductController {
 
     private final ProductService productService;
     private final ProductMapper productMapper;
 
+    @SuppressWarnings("unused")
     public ProductControllerImpl(final ProductService productService, final ProductMapper productMapper) {
         this.productService = productService;
         this.productMapper = productMapper;
