@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class FreeReceiptItem implements ReceiptItem {
+public class FreeReceiptItem {
 
     private int amount;
     private String productName;

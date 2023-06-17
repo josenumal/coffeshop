@@ -87,9 +87,9 @@ public class OrderServiceImpl implements OrderService {
     private List<FilterParams> getFilterParams() {
 
         return List.of(
-                new FilterParams(Comparator.comparing(Number::doubleValue),
-                        Receipt::getTotal),
                 new FilterParams(Comparator.comparing(Number::floatValue),
+                        Receipt::getTotal),
+                new FilterParams(Comparator.comparing(Number::intValue),
                         receipt -> receipt.getFreeReceiptItemSet().stream().mapToInt(FreeReceiptItem::getAmount).sum()));
     }
 
