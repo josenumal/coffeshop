@@ -1,5 +1,6 @@
-package com.inatlas.coffeeshop.models;
+package com.inatlas.coffeeshop.dto;
 
+import com.inatlas.coffeeshop.models.ProductType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ProductDto {
 
-    private int productId;
+    private int id;
 
     private String productName;
 

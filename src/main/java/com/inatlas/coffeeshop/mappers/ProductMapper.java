@@ -1,7 +1,7 @@
 package com.inatlas.coffeeshop.mappers;
 
+import com.inatlas.coffeeshop.dto.ProductDto;
 import com.inatlas.coffeeshop.entities.Product;
-import com.inatlas.coffeeshop.models.ProductDto;
 import org.mapstruct.Mapper;
 
 import java.util.List;

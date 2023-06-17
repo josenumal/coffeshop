@@ -31,7 +31,7 @@ public class FoodAndDrinksPromotion extends Promotion implements Promotable {
 
     @Override
     protected Receipt buildPromotionReceipt(final Receipt receipt, final List<Product> productList) {
-        productList.stream().filter(product -> product.getProductId() == PROMOTION_PRODUCT_ID).forEach(product -> product.setPrice(3f));
+        productList.stream().filter(product -> product.getId() == PROMOTION_PRODUCT_ID).forEach(product -> product.setPrice(3f));
 
         var newReceipt = new Receipt(receipt);
         newReceipt.setPromotionDescription(PROMOTION_DESCRIPTION);

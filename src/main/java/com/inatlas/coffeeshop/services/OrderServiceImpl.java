@@ -34,7 +34,7 @@ public class OrderServiceImpl implements OrderService {
     public Receipt placeOrder(final Order order) {
 
         var productIdList = new ArrayList<>(order.getOrderItems().keySet());
-        var productList = productService.findProductsByIds(productIdList);
+        var productList = productService.getAvailableProductsByIds(productIdList);
         var noPromotionReceipt = receiptService.createReceipt(order, productList);
 
         var promotionReceiptList = getApplicablePromotionReceipt(order, noPromotionReceipt, productList);

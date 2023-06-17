@@ -26,7 +26,7 @@ public class ReceiptServiceImpl implements ReceiptService {
     }
 
     private PaidReceiptItem createReceiptItem(final Integer productId, final Integer productAmount, final List<Product> productList) {
-        var productToItem = productList.stream().filter(product -> productId == product.getProductId()).findFirst().orElseThrow();
+        var productToItem = productList.stream().filter(product -> productId == product.getId()).findFirst().orElseThrow();
         return new PaidReceiptItem(productAmount, productToItem.getProductName(), productToItem.getPrice(), productAmount * productToItem.getPrice());
     }
 

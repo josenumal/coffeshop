@@ -1,6 +1,7 @@
 package com.inatlas.coffeeshop.controllers;
 
-import com.inatlas.coffeeshop.models.ProductDto;
+import com.inatlas.coffeeshop.dto.ProductDto;
+import com.inatlas.coffeeshop.mappers.ProductMapper;
 import com.inatlas.coffeeshop.services.ProductService;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,14 +11,60 @@ import java.util.List;
 public class ProductControllerImpl implements ProductController {
 
     private final ProductService productService;
+    private final ProductMapper productMapper;
 
-    public ProductControllerImpl(final ProductService productService) {
+    public ProductControllerImpl(final ProductService productService, final ProductMapper productMapper) {
         this.productService = productService;
+        this.productMapper = productMapper;
     }
 
     @Override
     public List<ProductDto> getAvailableProducts() {
-        return productService.getAvailableProducts();
+        return productMapper.productListToProductDtoList(productService.getAvailableProducts());
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public List<ProductDto> listProducts() {
+        return productMapper.productListToProductDtoList(productService.listProducts());
+    }
+
+    /**
+     * @param id
+     * @return
+     */
+    @Override
+    public ProductDto getProduct(final Integer id) {
+        return productMapper.productToProductDto(productService.getProduct(id));
+    }
+
+    /**
+     * @param productDto
+     * @return
+     */
+    @Override
+    public ProductDto createProduct(final ProductDto productDto) {
+        return productMapper.productToProductDto(productService.createProduct(productMapper.productDtoToProduct(productDto)));
+    }
+
+    /**
+     * @param id
+     * @param productDto
+     * @return
+     */
+    @Override
+    public ProductDto updateProduct(final Integer id, final ProductDto productDto) {
+        return productMapper.productToProductDto(productService.createProduct(productMapper.productDtoToProduct(productDto)));
+    }
+
+    /**
+     * @param id
+     */
+    @Override
+    public void removeProduct(final Integer id) {
+        productService.removeProduct(id);
     }
 
 }

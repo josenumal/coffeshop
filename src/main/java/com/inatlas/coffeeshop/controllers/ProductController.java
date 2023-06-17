@@ -1,8 +1,7 @@
 package com.inatlas.coffeeshop.controllers;
 
-import com.inatlas.coffeeshop.models.ProductDto;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.inatlas.coffeeshop.dto.ProductDto;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -11,5 +10,20 @@ public interface ProductController {
 
     @GetMapping("/available")
     List<ProductDto> getAvailableProducts();
+
+    @GetMapping
+    List<ProductDto> listProducts();
+
+    @GetMapping("/{id}")
+    ProductDto getProduct(@PathVariable Integer id);
+
+    @PostMapping
+    ProductDto createProduct(@RequestBody ProductDto productDto);
+
+    @PutMapping("/{id}")
+    ProductDto updateProduct(@PathVariable Integer id, @RequestBody ProductDto productDto);
+
+    @DeleteMapping("/{id}")
+    void removeProduct(@PathVariable Integer id);
 
 }
