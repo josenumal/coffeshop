@@ -1,6 +1,8 @@
 package com.inatlas.coffeeshop.services;
 
 import com.inatlas.coffeeshop.entities.Product;
+import com.inatlas.coffeeshop.mappers.ProductMapper;
+import com.inatlas.coffeeshop.models.ProductDto;
 import com.inatlas.coffeeshop.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,14 +12,19 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
 
-    public ProductServiceImpl(final ProductRepository productRepository) {
+    public ProductServiceImpl(final ProductRepository productRepository, final ProductMapper productMapper) {
         this.productRepository = productRepository;
+        this.productMapper = productMapper;
     }
 
     @Override
-    public List<Product> listProducts() {
-        return productRepository.findAll();
+    public List<ProductDto> getAvailableProducts() {
+
+        var aa = productRepository.findByAvailableTrue();
+
+        return productMapper.productListToProductDtoList(aa);
     }
 
     @Override

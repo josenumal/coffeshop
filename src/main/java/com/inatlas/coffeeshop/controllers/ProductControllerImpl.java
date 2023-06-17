@@ -1,6 +1,6 @@
 package com.inatlas.coffeeshop.controllers;
 
-import com.inatlas.coffeeshop.entities.Product;
+import com.inatlas.coffeeshop.models.ProductDto;
 import com.inatlas.coffeeshop.services.ProductService;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,8 +16,8 @@ public class ProductControllerImpl implements ProductController {
     }
 
     @Override
-    public List<Product> listProducts() {
-        return productService.listProducts();
+    public List<ProductDto> getAvailableProducts() {
+        return productService.getAvailableProducts();
     }
 
 }

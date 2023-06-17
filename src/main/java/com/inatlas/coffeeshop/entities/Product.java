@@ -1,13 +1,17 @@
 package com.inatlas.coffeeshop.entities;
 
 import com.inatlas.coffeeshop.models.ProductType;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "PRODUCT", schema = "COFFEE_SHOP_DEV")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class Product {
 
     @Id
