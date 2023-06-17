@@ -13,19 +13,15 @@ public class FoodAndDrinksPromotion extends Promotion implements Promotable {
 
     private static final float CONDITION_TOTAL_PRICE = 50f;
     private static final int PROMOTION_PRODUCT_ID = 1;
-    private static final String PROMOTION_DESCRIPTION = "FoodAndDrinksPromotion";
+    private static final String PROMOTION_DESCRIPTION = "Since your order is over $50 including food and drinks, each latte costs you $3";
 
     @Override
     protected boolean isPromotionApplicable(final Order order, final Receipt receipt, List<Product> productList) {
 
-        boolean existsBothTypes = productList.stream()
-                .map(Product::getProductType)
-                .anyMatch(productType -> productType == ProductType.FOOD)
-                && productList.stream()
-                .map(Product::getProductType)
-                .anyMatch(productType -> productType == ProductType.DRINKS);
-
-        return existsBothTypes && receipt.getTotal() <= CONDITION_TOTAL_PRICE;
+        return receipt.getTotal() > CONDITION_TOTAL_PRICE &&
+                productList.stream().anyMatch(productType -> productType.getId() == PROMOTION_PRODUCT_ID) &&
+                productList.stream().anyMatch(productType -> productType.getProductType() == ProductType.FOOD) &&
+                productList.stream().anyMatch(productType -> productType.getProductType() == ProductType.DRINKS);
 
     }
 

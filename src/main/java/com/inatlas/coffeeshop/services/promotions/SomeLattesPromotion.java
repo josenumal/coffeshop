@@ -16,7 +16,7 @@ public class SomeLattesPromotion extends Promotion implements Promotable {
     private static final int CONDITION_PRODUCT_ID = 1;
     private static final int CONDITION_PRODUCT_AMOUNT = 2;
     private static final String PROMOTION_PRODUCT_NAME = "Espresso";
-    private static final String PROMOTION_DESCRIPTION = "SomeLattesPromotion";
+    private static final String PROMOTION_DESCRIPTION = "You have received a free espresso for every two lattes ordered";
     private int latteAmount;
 
     @Override
