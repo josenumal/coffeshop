@@ -2,8 +2,8 @@ package com.inatlas.coffeeshop.services;
 
 import com.inatlas.coffeeshop.entities.Product;
 import com.inatlas.coffeeshop.models.Order;
+import com.inatlas.coffeeshop.models.PaidReceiptItem;
 import com.inatlas.coffeeshop.models.Receipt;
-import com.inatlas.coffeeshop.models.ReceiptItem;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -21,13 +21,13 @@ public class ReceiptServiceImpl implements ReceiptService {
                 entry -> createReceiptItem(entry.getKey(), entry.getValue(), productList)
         ).collect(Collectors.toSet());
 
-        var total = (float) receiptItemSet.stream().mapToDouble(ReceiptItem::getTotal).sum();
+        var total = (float) receiptItemSet.stream().mapToDouble(PaidReceiptItem::getTotal).sum();
         return new Receipt(receiptItemSet, Collections.emptySet(), total, 0, PROMOTION_DESCRIPTION);
     }
 
-    private ReceiptItem createReceiptItem(final Integer productId, final Integer productAmount, final List<Product> productList) {
+    private PaidReceiptItem createReceiptItem(final Integer productId, final Integer productAmount, final List<Product> productList) {
         var productToItem = productList.stream().filter(product -> productId == product.getProductId()).findFirst().orElseThrow();
-        return new ReceiptItem(productAmount, productToItem.getProductName(), productToItem.getPrice(), productAmount * productToItem.getPrice());
+        return new PaidReceiptItem(productAmount, productToItem.getProductName(), productToItem.getPrice(), productAmount * productToItem.getPrice());
     }
 
 }

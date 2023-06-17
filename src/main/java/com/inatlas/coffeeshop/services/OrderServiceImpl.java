@@ -6,11 +6,15 @@ import com.inatlas.coffeeshop.models.Order;
 import com.inatlas.coffeeshop.models.PromotionResponse;
 import com.inatlas.coffeeshop.models.Receipt;
 import com.inatlas.coffeeshop.services.promotions.Promotable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -52,29 +56,49 @@ public class OrderServiceImpl implements OrderService {
                 .collect(Collectors.toList());
     }
 
+    private static List<Receipt> getReceipts(final List<Receipt> chepeastReceiptList, final FilterParams filterParams) {
+
+        return chepeastReceiptList.stream()
+                .collect(Collectors.groupingBy(filterParams.getReceiptFunction()))
+                .entrySet()
+                .stream()
+                .min(Map.Entry.comparingByKey(filterParams.getNumberComparator()))
+                .map(Map.Entry::getValue)
+                .orElseThrow();
+    }
+
     private Receipt findBestPromotionReceipt(final List<Receipt> receiptList) {
 
-        var chepeastReceiptList = receiptList.stream()
-                .collect(Collectors.groupingBy(Receipt::getTotal))
-                .entrySet()
-                .stream()
-                .min(Map.Entry.comparingByKey())
-                .map(Map.Entry::getValue)
-                .orElseThrow();
+        List<Receipt> receiptFilterList = new ArrayList<>(receiptList);
 
-        if (chepeastReceiptList.size() == 1) {
-            return chepeastReceiptList.get(0);
+        for (FilterParams filterParams : getFilterParams()) {
+
+            receiptFilterList = getReceipts(receiptFilterList, filterParams);
+            if (receiptFilterList.size() == 1) {
+                return receiptFilterList.get(0);
+            }
+
         }
 
-        var moreProductsReceiptList = chepeastReceiptList.stream()
-                .collect(Collectors.groupingBy(receipt -> receipt.getFreeReceiptItemSet().stream().mapToInt(FreeReceiptItem::getAmount).sum()))
-                .entrySet()
-                .stream()
-                .min(Map.Entry.comparingByKey())
-                .map(Map.Entry::getValue)
-                .orElseThrow();
+        return receiptFilterList.get(0);
 
-        return moreProductsReceiptList.get(0);
+    }
+
+    private List<FilterParams> getFilterParams() {
+
+        return List.of(
+                new FilterParams(Comparator.comparing(Number::doubleValue),
+                        Receipt::getTotal),
+                new FilterParams(Comparator.comparing(Number::floatValue),
+                        receipt -> receipt.getFreeReceiptItemSet().stream().mapToInt(FreeReceiptItem::getAmount).sum()));
+    }
+
+    @Getter
+    @AllArgsConstructor
+    private static class FilterParams {
+
+        private Comparator<Number> numberComparator;
+        private Function<Receipt, Number> receiptFunction;
 
     }
 

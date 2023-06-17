@@ -11,14 +11,14 @@ import java.util.Set;
 @AllArgsConstructor
 public class Receipt {
 
-    private Set<ReceiptItem> receiptItemSet;
+    private Set<PaidReceiptItem> paidReceiptItemSet;
     private Set<FreeReceiptItem> freeReceiptItemSet;
     private float total;
     private int discountPercent;
     private String promotionDescription;
 
     public Receipt(final Receipt receipt) {
-        this.receiptItemSet = receipt.getReceiptItemSet();
+        this.paidReceiptItemSet = receipt.getPaidReceiptItemSet();
         this.freeReceiptItemSet = receipt.getFreeReceiptItemSet();
         this.total = receipt.getTotal();
         this.discountPercent = receipt.getDiscountPercent();
