@@ -4,6 +4,7 @@ import com.inatlas.coffeeshop.entities.Product;
 import com.inatlas.coffeeshop.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -22,50 +23,35 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAvailableProductsByIds(final List<Integer> productIdList) {
-        return productRepository.findAllById(productIdList);
+        return productRepository.findByAvailableTrueAndIdIn(productIdList);
     }
 
-    /**
-     * @return
-     */
     @Override
     public List<Product> listProducts() {
-        return null;
+        return productRepository.findAll();
     }
 
-    /**
-     * @param id
-     * @return
-     */
     @Override
     public Product getProduct(final Integer id) {
-        return null;
+        return productRepository.findById(id).orElseThrow();
     }
 
-    /**
-     * @param product
-     * @return
-     */
     @Override
+    @Transactional
     public Product createProduct(final Product product) {
-        return null;
+        return productRepository.save(product);
     }
 
-    /**
-     * @param id
-     * @param product
-     * @return
-     */
     @Override
+    @Transactional
     public Product updateProduct(final Integer id, final Product product) {
-        return null;
+        return productRepository.save(product);
     }
 
-    /**
-     * @param id
-     */
     @Override
-    public void removeProduct(final Integer id) {
+    @Transactional
+    public void deleteProduct(final Integer id) {
+        productRepository.deleteById(id);
 
     }
 

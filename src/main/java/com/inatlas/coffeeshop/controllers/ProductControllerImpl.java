@@ -23,48 +23,29 @@ public class ProductControllerImpl implements ProductController {
         return productMapper.productListToProductDtoList(productService.getAvailableProducts());
     }
 
-    /**
-     * @return
-     */
     @Override
     public List<ProductDto> listProducts() {
         return productMapper.productListToProductDtoList(productService.listProducts());
     }
 
-    /**
-     * @param id
-     * @return
-     */
     @Override
     public ProductDto getProduct(final Integer id) {
         return productMapper.productToProductDto(productService.getProduct(id));
     }
 
-    /**
-     * @param productDto
-     * @return
-     */
     @Override
     public ProductDto createProduct(final ProductDto productDto) {
         return productMapper.productToProductDto(productService.createProduct(productMapper.productDtoToProduct(productDto)));
     }
 
-    /**
-     * @param id
-     * @param productDto
-     * @return
-     */
     @Override
     public ProductDto updateProduct(final Integer id, final ProductDto productDto) {
         return productMapper.productToProductDto(productService.createProduct(productMapper.productDtoToProduct(productDto)));
     }
 
-    /**
-     * @param id
-     */
     @Override
-    public void removeProduct(final Integer id) {
-        productService.removeProduct(id);
+    public void deleteProduct(final Integer id) {
+        productService.deleteProduct(id);
     }
 
 }

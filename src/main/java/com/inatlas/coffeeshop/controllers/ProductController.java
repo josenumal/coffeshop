@@ -24,6 +24,6 @@ public interface ProductController {
     ProductDto updateProduct(@PathVariable Integer id, @RequestBody ProductDto productDto);
 
     @DeleteMapping("/{id}")
-    void removeProduct(@PathVariable Integer id);
+    void deleteProduct(@PathVariable Integer id);
 
 }

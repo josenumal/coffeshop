@@ -11,4 +11,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     List<Product> findByAvailableTrue();
 
+    List<Product> findByAvailableTrueAndIdIn(List<Integer> ids);
+
 }
