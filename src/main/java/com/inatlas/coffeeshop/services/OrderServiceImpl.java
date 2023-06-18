@@ -1,6 +1,7 @@
 package com.inatlas.coffeeshop.services;
 
 import com.inatlas.coffeeshop.entities.Product;
+import com.inatlas.coffeeshop.exceptions.BadOrderException;
 import com.inatlas.coffeeshop.models.FreeReceiptItem;
 import com.inatlas.coffeeshop.models.Order;
 import com.inatlas.coffeeshop.models.PromotionResponse;
@@ -34,8 +35,12 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Receipt placeOrder(final Order order) {
 
-        var productIdList = new ArrayList<>(order.getOrderItems().keySet());
-        var productList = productService.getAvailableProductsByIds(productIdList);
+        if (order == null || order.getOrderItems() == null || order.getOrderItems().isEmpty()) {
+            throw new BadOrderException("Order is null or empty");
+        }
+
+        var productOrderIdList = new ArrayList<>(order.getOrderItems().keySet());
+        var productList = productService.getAvailableProductsByIds(productOrderIdList);
         var noPromotionReceipt = receiptService.createReceipt(order, productList);
 
         var promotionReceiptList = getApplicablePromotionReceipt(order, noPromotionReceipt, productList);
@@ -90,7 +95,7 @@ public class OrderServiceImpl implements OrderService {
         return List.of(
                 new FilterParams(Comparator.comparing(bigDecimalNumber -> BigDecimal.valueOf(bigDecimalNumber.doubleValue())),
                         Receipt::getTotal),
-                new FilterParams(Comparator.comparing(Number::intValue),
+                new FilterParams(Comparator.comparing(Number::intValue).reversed(),
                         receipt -> receipt.getFreeReceiptItemSet().stream().mapToInt(FreeReceiptItem::getAmount).sum()));
     }
 

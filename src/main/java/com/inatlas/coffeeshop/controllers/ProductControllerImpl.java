@@ -1,6 +1,6 @@
 package com.inatlas.coffeeshop.controllers;
 
-import com.inatlas.coffeeshop.dto.ProductDto;
+import com.inatlas.coffeeshop.dtos.ProductDto;
 import com.inatlas.coffeeshop.mappers.ProductMapper;
 import com.inatlas.coffeeshop.services.ProductService;
 import org.springframework.web.bind.annotation.RestController;

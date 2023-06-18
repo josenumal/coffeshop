@@ -28,6 +28,7 @@ public class LotOfProductsPromotion extends Promotion implements Promotable {
 
         var newReceipt = new Receipt(receipt);
         newReceipt.setTotal(receipt.getTotal().subtract(receipt.getTotal().multiply(PROMOTION_DISCOUNT_PERCENT)));
+        newReceipt.setDiscountPercent(PROMOTION_DISCOUNT_PERCENT);
         newReceipt.setPromotionDescription(PROMOTION_DESCRIPTION);
 
         return newReceipt;

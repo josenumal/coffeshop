@@ -1,4 +1,4 @@
-package com.inatlas.coffeeshop.exception;
+package com.inatlas.coffeeshop.exceptions;
 
 public class BadOrderException extends RuntimeException {
 

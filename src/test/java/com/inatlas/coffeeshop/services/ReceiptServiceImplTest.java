@@ -1,7 +1,7 @@
 package com.inatlas.coffeeshop.services;
 
 import com.inatlas.coffeeshop.entities.Product;
-import com.inatlas.coffeeshop.exception.BadOrderException;
+import com.inatlas.coffeeshop.exceptions.BadOrderException;
 import com.inatlas.coffeeshop.models.Order;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -142,7 +142,7 @@ class ReceiptServiceImplTest {
             }
 
             @Test
-            @DisplayName("should return a correct receive")
+            @DisplayName("should return a correct receipt")
             void createReceipt() {
 
                 var result = receiptService.createReceipt(order, productList);

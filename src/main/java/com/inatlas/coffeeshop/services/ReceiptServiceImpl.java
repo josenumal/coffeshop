@@ -1,7 +1,7 @@
 package com.inatlas.coffeeshop.services;
 
 import com.inatlas.coffeeshop.entities.Product;
-import com.inatlas.coffeeshop.exception.BadOrderException;
+import com.inatlas.coffeeshop.exceptions.BadOrderException;
 import com.inatlas.coffeeshop.models.Order;
 import com.inatlas.coffeeshop.models.PaidReceiptItem;
 import com.inatlas.coffeeshop.models.Receipt;
@@ -28,7 +28,7 @@ public class ReceiptServiceImpl implements ReceiptService {
         ).collect(Collectors.toSet());
 
         var total = receiptItemSet.stream().map(PaidReceiptItem::getTotal).reduce(BigDecimal.ZERO, BigDecimal::add);
-        return new Receipt(receiptItemSet, Collections.emptySet(), total, 0, PROMOTION_DESCRIPTION);
+        return new Receipt(receiptItemSet, Collections.emptySet(), total, BigDecimal.ZERO, PROMOTION_DESCRIPTION);
     }
 
     private PaidReceiptItem createReceiptItem(final Integer productId, final Integer productAmount, final List<Product> productList) {

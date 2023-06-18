@@ -1,12 +1,12 @@
 package com.inatlas.coffeeshop.models;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @EqualsAndHashCode
+@Builder
 public class FreeReceiptItem {
 
     private int amount;

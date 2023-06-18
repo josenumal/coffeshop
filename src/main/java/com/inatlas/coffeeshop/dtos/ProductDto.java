@@ -1,4 +1,4 @@
-package com.inatlas.coffeeshop.dto;
+package com.inatlas.coffeeshop.dtos;
 
 import com.inatlas.coffeeshop.models.ProductType;
 import lombok.Getter;
