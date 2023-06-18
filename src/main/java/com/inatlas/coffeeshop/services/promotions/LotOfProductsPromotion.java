@@ -24,7 +24,7 @@ public class LotOfProductsPromotion extends Promotion implements Promotable {
     }
 
     @Override
-    protected Receipt buildPromotionReceipt(final Receipt receipt, final List<Product> productList) {
+    protected Receipt buildPromotionReceipt(final Order order, final Receipt receipt, final List<Product> productList) {
 
         var newReceipt = new Receipt(receipt);
         newReceipt.setTotal(receipt.getTotal().subtract(receipt.getTotal().multiply(PROMOTION_DISCOUNT_PERCENT)));

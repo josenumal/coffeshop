@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Component
+@SuppressWarnings("unused")
 public class SomeLattesPromotion extends Promotion implements Promotable {
 
     private static final int CONDITION_PRODUCT_ID = 1;
@@ -32,7 +33,7 @@ public class SomeLattesPromotion extends Promotion implements Promotable {
     }
 
     @Override
-    protected Receipt buildPromotionReceipt(final Receipt receipt, final List<Product> productList) {
+    protected Receipt buildPromotionReceipt(final Order order, final Receipt receipt, final List<Product> productList) {
 
         var freeReceiptItemSet = Set.of(new FreeReceiptItem(latteAmount / CONDITION_PRODUCT_AMOUNT, PROMOTION_PRODUCT_NAME));
         var newReceipt = new Receipt(receipt);

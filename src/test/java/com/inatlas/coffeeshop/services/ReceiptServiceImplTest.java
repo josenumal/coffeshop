@@ -49,7 +49,7 @@ class ReceiptServiceImplTest {
 
             @Test
             @DisplayName("should throws BadOrderException")
-            void createReceipt() {
+            void test() {
 
                 var exception = assertThrows(BadOrderException.class, () -> receiptService.createReceipt(order, productList));
 
@@ -70,7 +70,7 @@ class ReceiptServiceImplTest {
 
             @Test
             @DisplayName("should throws BadOrderException")
-            void createReceipt() {
+            void test() {
 
                 var exception = assertThrows(BadOrderException.class, () -> receiptService.createReceipt(order, productList));
 
@@ -91,7 +91,7 @@ class ReceiptServiceImplTest {
 
             @Test
             @DisplayName("should throws BadOrderException")
-            void createReceipt() {
+            void test() {
 
                 var exception = assertThrows(BadOrderException.class, () -> receiptService.createReceipt(order, productList));
 
@@ -112,7 +112,7 @@ class ReceiptServiceImplTest {
 
             @Test
             @DisplayName("should throws BadOrderException")
-            void createReceipt() {
+            void test() {
 
                 var exception = assertThrows(BadOrderException.class, () -> receiptService.createReceipt(order, productList));
 
@@ -143,7 +143,7 @@ class ReceiptServiceImplTest {
 
             @Test
             @DisplayName("should return a correct receipt")
-            void createReceipt() {
+            void test() {
 
                 var result = receiptService.createReceipt(order, productList);
 

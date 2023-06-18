@@ -11,12 +11,12 @@ public abstract class Promotion {
 
     protected abstract boolean isPromotionApplicable(final Order order, final Receipt receipt, List<Product> productList);
 
-    protected abstract Receipt buildPromotionReceipt(final Receipt receipt, final List<Product> productList);
+    protected abstract Receipt buildPromotionReceipt(final Order order, final Receipt receipt, final List<Product> productList);
 
     public PromotionResponse getPromotionResponse(final Order order, final Receipt receipt, List<Product> productList) {
 
         if (isPromotionApplicable(order, receipt, productList)) {
-            return new PromotionResponse(true, buildPromotionReceipt(receipt, productList));
+            return new PromotionResponse(true, buildPromotionReceipt(order, receipt, productList));
         }
 
         return new PromotionResponse(false, receipt);

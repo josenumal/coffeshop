@@ -86,7 +86,7 @@ class OrderServiceImplTest {
 
             @Test
             @DisplayName("should throws BadOrderException")
-            void createReceipt() {
+            void test() {
 
                 var exception = assertThrows(BadOrderException.class, () -> orderService.placeOrder(order));
 
@@ -107,7 +107,7 @@ class OrderServiceImplTest {
 
             @Test
             @DisplayName("should throws BadOrderException")
-            void createReceipt() {
+            void test() {
 
                 var exception = assertThrows(BadOrderException.class, () -> orderService.placeOrder(order));
 
@@ -128,7 +128,7 @@ class OrderServiceImplTest {
 
             @Test
             @DisplayName("should throws BadOrderException")
-            void createReceipt() {
+            void test() {
 
                 var exception = assertThrows(BadOrderException.class, () -> orderService.placeOrder(order));
 
@@ -199,7 +199,7 @@ class OrderServiceImplTest {
 
             @Test
             @DisplayName("should return noPromotionReceipt")
-            void createReceipt() {
+            void test() {
 
                 var result = orderService.placeOrder(order);
 
@@ -230,7 +230,7 @@ class OrderServiceImplTest {
 
             @Test
             @DisplayName("should return promotion receipt")
-            void createReceipt() {
+            void test() {
 
                 var result = orderService.placeOrder(order);
 
@@ -261,7 +261,7 @@ class OrderServiceImplTest {
 
             @Test
             @DisplayName("should return promotion receipt with lower total price")
-            void createReceipt() {
+            void test() {
 
                 var result = orderService.placeOrder(order);
 
@@ -295,7 +295,7 @@ class OrderServiceImplTest {
 
             @Test
             @DisplayName("should return promotion receipt with more free product")
-            void createReceipt() {
+            void test() {
 
                 var result = orderService.placeOrder(order);
 
@@ -330,7 +330,7 @@ class OrderServiceImplTest {
 
             @Test
             @DisplayName("should return first promotion receipt")
-            void createReceipt() {
+            void test() {
 
                 var result = orderService.placeOrder(order);
 
