@@ -53,12 +53,12 @@ class FoodAndDrinksPromotionTest {
     class IsPromotionApplicable {
 
         @Nested
-        @DisplayName("When total price is 49")
-        class WhenTotalIs49 {
+        @DisplayName("When total price is 50")
+        class WhenTotalIs50 {
 
             @BeforeEach
             void setUp() {
-                receipt = Receipt.builder().total(new BigDecimal("49")).build();
+                receipt = Receipt.builder().total(new BigDecimal("50")).build();
             }
 
             @Test
@@ -234,6 +234,7 @@ class FoodAndDrinksPromotionTest {
 
             assertEquals(new BigDecimal("3"), productList.stream().filter(product -> product.getId() == 1).findFirst().map(Product::getPrice).orElseThrow());
 
+            assertEquals(BigDecimal.ZERO, result.getDiscountPercent());
             assertEquals("Since your order is over $50 including food and drinks, each latte costs you $3", result.getPromotionDescription());
 
         }
