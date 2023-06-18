@@ -147,20 +147,27 @@ class LotOfProductsPromotionTest {
     @Nested
     class BuildPromotionReceipt {
 
-        @BeforeEach
-        void setUp() {
-            receipt = Receipt.builder().total(new BigDecimal(100)).promotionDescription("No promotion").build();
-        }
+        @Nested
+        @DisplayName("When total price is 100")
+        class WhenTotalPriceIs100 {
 
-        @Test
-        void test() {
+            @BeforeEach
+            void setUp() {
+                receipt = Receipt.builder().total(new BigDecimal("100.00")).discountPercent(BigDecimal.ZERO).promotionDescription("No promotion").build();
+            }
 
-            var result = lotOfProductsPromotion.buildPromotionReceipt(order, receipt, productList);
+            @Test
+            @DisplayName("receipt should be 95 and discount 0,05 ")
+            void test() {
 
-            assertEquals(new BigDecimal("95.00"), result.getTotal());
-            assertEquals(new BigDecimal("0.05"), result.getDiscountPercent());
-            assertEquals("You have a 5% discount on the final price for ordering more than 8 products", result.getPromotionDescription());
+                var result = lotOfProductsPromotion.buildPromotionReceipt(order, receipt, productList);
 
+                assertEquals(new BigDecimal("95.0000"), result.getTotal());
+                assertEquals(new BigDecimal("0.05"), result.getDiscountPercent());
+                assertNull(result.getFreeReceiptItemSet());
+                assertEquals("You have a 5% discount on the final price for ordering more than 8 products", result.getPromotionDescription());
+
+            }
         }
     }
 }

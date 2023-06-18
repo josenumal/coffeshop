@@ -205,38 +205,46 @@ class FoodAndDrinksPromotionTest {
     @Nested
     class BuildPromotionReceipt {
 
-        @Captor
-        private ArgumentCaptor<Order> orderArgumentCaptor;
+        @Nested
+        @DisplayName("When build promotion receipt")
+        class WhenBuildPromotionReceipt {
 
-        @Captor
-        private ArgumentCaptor<List<Product>> productListArgumentCaptor;
+            @Captor
+            private ArgumentCaptor<Order> orderArgumentCaptor;
 
-        @BeforeEach
-        void setUp() {
+            @Captor
+            private ArgumentCaptor<List<Product>> productListArgumentCaptor;
 
-            receipt = Receipt.builder().promotionDescription("No promotion").build();
-            when(receiptService.createReceipt(any(Order.class), anyList())).thenReturn(receipt);
-        }
+            @BeforeEach
+            void setUp() {
 
-        @Test
-        void test() {
+                receipt = Receipt.builder().total(new BigDecimal("100.00")).discountPercent(BigDecimal.ZERO).promotionDescription("No promotion").build();
+                when(receiptService.createReceipt(any(Order.class), anyList())).thenReturn(receipt);
+            }
 
-            var result = foodAndDrinksPromotion.buildPromotionReceipt(order, receipt, productList);
+            @Test
+            @DisplayName("should call createReceipt with latte price = 3")
+            void test() {
 
-            verify(receiptService, times(1)).createReceipt(orderArgumentCaptor.capture(), productListArgumentCaptor.capture());
-            assertEquals(order, orderArgumentCaptor.getValue());
-            var productList = productListArgumentCaptor.getValue();
+                var result = foodAndDrinksPromotion.buildPromotionReceipt(order, receipt, productList);
 
-            assertEquals(1, productList.stream().filter(product -> product.getId() == 1).count());
-            assertEquals(1, productList.stream().filter(product -> product.getId() == 2).count());
-            assertEquals(1, productList.stream().filter(product -> product.getId() == 3).count());
-            assertEquals(0, productList.stream().filter(product -> product.getId() == 4).count());
+                verify(receiptService, times(1)).createReceipt(orderArgumentCaptor.capture(), productListArgumentCaptor.capture());
+                assertEquals(order, orderArgumentCaptor.getValue());
+                var productList = productListArgumentCaptor.getValue();
 
-            assertEquals(new BigDecimal("3"), productList.stream().filter(product -> product.getId() == 1).findFirst().map(Product::getPrice).orElseThrow());
+                assertEquals(1, productList.stream().filter(product -> product.getId() == 1).count());
+                assertEquals(1, productList.stream().filter(product -> product.getId() == 2).count());
+                assertEquals(1, productList.stream().filter(product -> product.getId() == 3).count());
+                assertEquals(0, productList.stream().filter(product -> product.getId() == 4).count());
 
-            assertEquals(BigDecimal.ZERO, result.getDiscountPercent());
-            assertEquals("Since your order is over $50 including food and drinks, each latte costs you $3", result.getPromotionDescription());
+                assertEquals(new BigDecimal("3"), productList.stream().filter(product -> product.getId() == 1).findFirst().map(Product::getPrice).orElseThrow());
 
+                assertEquals(new BigDecimal("100.00"), result.getTotal());
+                assertEquals(BigDecimal.ZERO, result.getDiscountPercent());
+                assertNull(result.getFreeReceiptItemSet());
+                assertEquals("Since your order is over $50 including food and drinks, each latte costs you $3", result.getPromotionDescription());
+
+            }
         }
     }
 }
