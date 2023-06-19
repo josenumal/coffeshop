@@ -8,6 +8,7 @@ import com.inatlas.coffeeshop.models.Receipt;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,7 +28,7 @@ public class ReceiptServiceImpl implements ReceiptService {
                 entry -> createReceiptItem(entry.getKey(), entry.getValue(), productList)
         ).collect(Collectors.toSet());
 
-        var total = receiptItemSet.stream().map(PaidReceiptItem::getTotal).reduce(BigDecimal.ZERO, BigDecimal::add);
+        var total = receiptItemSet.stream().map(PaidReceiptItem::getTotal).reduce(BigDecimal.ZERO, BigDecimal::add).setScale(2, RoundingMode.HALF_UP);
         return new Receipt(receiptItemSet, Collections.emptySet(), total, BigDecimal.ZERO, PROMOTION_DESCRIPTION);
     }
 

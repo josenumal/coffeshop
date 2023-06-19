@@ -6,6 +6,7 @@ import com.inatlas.coffeeshop.models.Receipt;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Component
@@ -27,7 +28,8 @@ public class LotOfProductsPromotion extends Promotion implements Promotable {
     protected Receipt buildPromotionReceipt(final Order order, final Receipt receipt, final List<Product> productList) {
 
         var newReceipt = new Receipt(receipt);
-        newReceipt.setTotal(receipt.getTotal().subtract(receipt.getTotal().multiply(PROMOTION_DISCOUNT_PERCENT)));
+        var total = receipt.getTotal().subtract(receipt.getTotal().multiply(PROMOTION_DISCOUNT_PERCENT)).setScale(2, RoundingMode.HALF_UP);
+        newReceipt.setTotal(total);
         newReceipt.setDiscountPercent(PROMOTION_DISCOUNT_PERCENT);
         newReceipt.setPromotionDescription(PROMOTION_DESCRIPTION);
 

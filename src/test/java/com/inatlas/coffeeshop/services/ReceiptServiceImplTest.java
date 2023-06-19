@@ -163,7 +163,7 @@ class ReceiptServiceImplTest {
                 //Product 3
                 assertTrue(result.getPaidReceiptItemSet().stream().noneMatch(paidReceiptItem -> paidReceiptItem.getProductName().equals("Product 3")));
 
-                assertEquals(new BigDecimal("8.2"), result.getTotal());
+                assertEquals(new BigDecimal("8.20"), result.getTotal());
 
             }
 

@@ -162,7 +162,7 @@ class LotOfProductsPromotionTest {
 
                 var result = lotOfProductsPromotion.buildPromotionReceipt(order, receipt, productList);
 
-                assertEquals(new BigDecimal("95.0000"), result.getTotal());
+                assertEquals(new BigDecimal("95.00"), result.getTotal());
                 assertEquals(new BigDecimal("0.05"), result.getDiscountPercent());
                 assertNull(result.getFreeReceiptItemSet());
                 assertEquals("You have a 5% discount on the final price for ordering more than 8 products", result.getPromotionDescription());
