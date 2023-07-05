@@ -42,7 +42,7 @@ public class ProductControllerImpl implements ProductController {
 
     @Override
     public ProductDto updateProduct(final Integer id, final ProductDto productDto) {
-        return productMapper.productToProductDto(productService.createProduct(productMapper.productDtoToProduct(productDto)));
+        return productMapper.productToProductDto(productService.updateProduct(id, productMapper.productDtoToProduct(productDto)));
     }
 
     @Override
