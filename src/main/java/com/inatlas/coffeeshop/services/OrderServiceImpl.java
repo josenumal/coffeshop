@@ -93,7 +93,7 @@ public class OrderServiceImpl implements OrderService {
     private List<FilterParams> getFilterParams() {
 
         return List.of(
-                new FilterParams(Comparator.comparing(bigDecimalNumber -> BigDecimal.valueOf(bigDecimalNumber.doubleValue())),
+                new FilterParams(Comparator.comparing(number -> BigDecimal.valueOf(number.doubleValue())),
                         Receipt::getTotal),
                 new FilterParams(Comparator.comparing(Number::intValue).reversed(),
                         receipt -> receipt.getFreeReceiptItemSet().stream().mapToInt(FreeReceiptItem::getAmount).sum()));
