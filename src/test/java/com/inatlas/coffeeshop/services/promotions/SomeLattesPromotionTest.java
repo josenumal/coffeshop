@@ -149,7 +149,7 @@ class SomeLattesPromotionTest {
     class BuildPromotionReceipt {
 
         @Nested
-        @DisplayName("When there are 2 latte")
+        @DisplayName("When there are 2 lattes")
         class WhenThereAre2Latte {
 
             @BeforeEach
